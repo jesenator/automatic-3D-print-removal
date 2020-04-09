@@ -1,4 +1,4 @@
-# automatic-3D-print-remove-and-repeat
+# automatic-3D-print-removal
      In response to the recent COVID-19 pandemic I 3D printed respirators and face shields to donate to local healthcare facilities in need. I worked to increase production of 3D printed respirators by writing a Python program to make my 3D printer automatically remove the mask when finished and then start the next one.
      For other smaller prints, it worked to simply have the gantry push the print off, but this respirator was stuck too well to the build plate for that to be possible. Instead, I developed a way for the printer to interlock the gantry with the nose piece and then effectively pry it off the build plate.
      With this setup, I can leave my printer to continuously produce masks without any need for human intervention (until the filament runs out). This means significantly more masks can be made
