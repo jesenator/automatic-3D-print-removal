@@ -9,6 +9,6 @@
 	There are also some helpful features to note:
 		By default the print head will go to the avg x value ((minx+maxx)/2) to knock the print off
 		It tells you the print time and filament used
-		It renames the file with multiprint(n).gcode where n is the number of iterations
+		It renames the file and adds multiprint(n).gcode where n is the number of iterations
 		It will report an error if the print is iterated too many times and the purge line overlaps with the print
 		
