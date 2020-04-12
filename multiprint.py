@@ -81,18 +81,18 @@ M300 S880 P300
 
 G1 X0 Y235 ;Present print
 
-M0 S10 "remove print then click to continue"
+M0 S300 remove print, click to continue
 
 M106 S0 ;Turn-off fan
 M104 S0 ;Turn-off hotend
 M140 S0 ;Turn-off bed
 
-M0 remove print then click to continue
+M0 remove print, click to continue
 
-M140 S{material_bed_temperature_layer_0} ; start preheating the bed
-M104 S{material_print_temperature_layer_0} T0; start preheating hotend
-M190 S{material_bed_temperature_layer_0} ; heat to Cura Bed setting 
-M109 S{material_print_temperature_layer_0} T0 ; heat to Cura Hotend
+M140 S60.234 ; start preheating the bed
+M104 S220.234 T0 ; start preheating hotend
+M190 S60.234 ; heat to Cura Bed setting 
+M109 S220.234 T0 ; heat to Cura Hotend
 ;---------------------------------------------------------------------------
 '''
 
@@ -101,6 +101,7 @@ fileLocation="C:/Users/lgilb/AppData/Local/Programs/Python/Python38/G code/"
 ######################################################################### user inputs
 #default values
 filename="CE3_NIH visor(x2~1~.48).gcode"
+#filename="CE3_slide test.gcode"
 n=10
 coolTime=0
 special="manual"
@@ -159,7 +160,17 @@ if(special=="shield"):
     subgcode=subgcode.replace(";no special removal", shieldSubgcode)
 if(special=="manual"):
     print("the the printer will stay heated for 5 minutes after finishing for you to remove the print, then press the knob twice to print the next (don't forget the purge line)")
+    index=int(originalCode.index("M140 ")+6)
+    #print(originalCode[index: index+2])
+    manual=manual.replace("60.234", originalCode[index: index+2])
+
+    index=int(originalCode.index("M104 ")+6)
+    #print(originalCode[index: index+3])
+    manual=manual.replace("220.234", originalCode[index: index+3])
+    #print(manual)
     subgcode=manual
+
+    
 
 #figuring out how far the purge lines will go based on how many times it is iterated
 if(special!="manual"):
@@ -174,13 +185,16 @@ else:
     filename=filename.replace(".gcode", "") + "[manual].gcode"
     newgcode=open((fileLocation+filename), "w+")
     n=round(330/meters)
-
+    if n>50:
+        n=50
+    originalCode=originalCode.replace("M140 S0", "", 1)
+    newCode=newCode.replace("M140 S0", "", 1)
 
 gcode.seek(0,0)
 
 #building new g-code
 for a in range(0, int(n)-1):
-    print(a)
+    #print(a)
     code=originalCode
     if(special!="manual"):
         #replace x values of the purgeline over by an offset for each iteration
@@ -194,7 +208,7 @@ for a in range(0, int(n)-1):
     
     newCode=newCode + subgcode + "\n;--------start of iteration number " + str(a+2) + "--------\n" + code
 
-#write new g-code to the
+#write new g-code to the file
 #print(newCode)
 newgcode.write(newCode)
 
