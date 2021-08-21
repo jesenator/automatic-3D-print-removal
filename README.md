@@ -1,3 +1,4 @@
+portfolio entry with more information: https://jessegilbert.notion.site/Automatic-3D-print-removal-3321100ee423443cb40b0935643cb917
 # automatic-3D-print-removal
 In response to the recent COVID-19 pandemic I 3D printed respirators and face shields to donate to local healthcare facilities in need. I worked to increase production of 3D printed respirators by writing a Python program to make my 3D printer automatically remove the mask when finished and then start the next one.
 
