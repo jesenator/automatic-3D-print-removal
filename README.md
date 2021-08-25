@@ -17,5 +17,5 @@ There are also some helpful features to note:
 - It tells you the print time and filament used
 - It renames the file and adds multiprint(n).gcode where n is the number of iterations
 
-Edit: I converted the program to Java and wrote it much more cleanly. The features in the Java version are slightly different and it is also much easier to understand.
+Edit: I converted the program to Java and wrote it much more cleanly. The features in the Java version are slightly different and it is also much easier to understand. Be warned the Python program is a mess. It was the fist thing I wrote with Python
 		
